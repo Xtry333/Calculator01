@@ -47,8 +47,8 @@ namespace Calculator01
                 if (input.StartsWith("-"))
                 {
                     input = input.TrimStart('-');
-                    inputFormated = inputFormated.TrimStart(' ').TrimStart('-').TrimStart(' ');
-                    inputFormated =  '-' + inputFormated;
+                    inputFormated = inputFormated.TrimStart(' ');//.TrimStart('-').TrimStart(' ');
+                    //inputFormated =  '-' + inputFormated;
                     input = input.Replace("-", "+-");
                     input = "-" + input;
                 } else
@@ -56,35 +56,53 @@ namespace Calculator01
                     input = input.Replace("-", "+-");
                 }
                 input = input.Replace("*+", "*");
-
-
-
+                
                 String[] substringsAdd = input.Split('+');
                 String[] substringsMultiply = input.Split('*');
+                String[] substringsDivide = input.Split('/');
                 //String[] substringsMultiply2 = new String[31];
                 //Console.WriteLine("Length: " + substringsAdd.GetLength(0));
 
                 //foreach (var substring in substringsAdd)
-                    //Console.WriteLine("Add: : " + substring);
+                //Console.WriteLine("Add: : " + substring);
                 Console.WriteLine("");
                 //foreach (var substring in substringsMultiply)
                 //Console.WriteLine("Mpl: : " + substring);
                 Console.WriteLine("Formated input: {0}", input);
                 Console.WriteLine("");
                 if (substringsAdd.GetLength(0) > 0)
-                for (int i = 0; i < substringsAdd.GetLength(0); i++)
                 {
-                    String[]  substringsMultiply2 = substringsAdd[i].Split('*');
-                    Console.Write("Add: " + i + " :" + substringsAdd[i] + ", ");
-                    foreach (var substring in substringsMultiply2)
+                    for (int i = 0; i < substringsAdd.GetLength(0); i++)
                     {
-                        if (substring != "")
-                        t2 *= Convert.ToDouble(substring);
+                        String[] substringsMultiply2 = substringsAdd[i].Split('*');
+                        Console.Write("Add: " + i + " :" + substringsAdd[i] + ", ");
+                        foreach (var substring in substringsMultiply2)
+                        {
+                            if (substring != "")
+                            {
+                                try
+                                {
+                                    String[] substringsDivide2 = substring.Split('/');
+                                    if (substringsDivide2.GetLength(0) > 1)
+                                    {
+                                        //Console.Write("..{0}..", substring);
+
+                                        t2 *= Convert.ToDouble(substringsDivide2[0]) / Convert.ToDouble(substringsDivide2[1]);
+                                    }
+                                    else
+                                        t2 *= Convert.ToDouble(substring);
+                                }
+                                catch
+                                {
+                                    Console.WriteLine("Invalid expression or...? /M");
+                                }
+                            }
+                        }
+                        //Console.WriteLine("Mpl: : " + substring);
+                        substringsAdd[i] = t2.ToString();
+                        t2 = 1;
+                        Console.Write(substringsAdd[i] + "\n");
                     }
-                    //Console.WriteLine("Mpl: : " + substring);
-                    substringsAdd[i] = t2.ToString();
-                    t2 = 1;
-                    Console.Write(substringsAdd[i] + "\n");
                 }
                 Console.WriteLine("");
                 //foreach (var substring in substringsMultiply)
@@ -126,7 +144,7 @@ namespace Calculator01
                     }
                     catch
                     {
-                        Console.WriteLine("Invalid expression or...?");
+                        Console.WriteLine("Invalid expression or...? /A");
                         Console.WriteLine(inputFormated);
                         Console.WriteLine("");
                     }
