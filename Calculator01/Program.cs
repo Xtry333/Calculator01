@@ -14,7 +14,7 @@ namespace Calculator01
             bool quit = false;
             int loopIT = 0;
             string input = "";
-            string inputOld = "";
+            string inputFormated = "";
 
             double t1;
             double t2;
@@ -29,10 +29,9 @@ namespace Calculator01
                 input = Console.ReadLine();
                 Console.Clear();
                 if (input == "") { quit = true; break; }
-
-                inputOld = input;
-
+                
                 input = input.Replace(" ", "");
+                inputFormated = input;
                 if (input.StartsWith("-"))
                 {
                     input = input.TrimStart('-');
@@ -56,7 +55,7 @@ namespace Calculator01
                     {
                         foreach (var substring in substrings)
                             t1 += Convert.ToDouble(substring);
-                        Console.WriteLine(inputOld + " = " + t1);
+                        Console.WriteLine(inputFormated + " = " + t1);
                     }
                     catch
                     {
