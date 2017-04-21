@@ -44,6 +44,7 @@ namespace Calculator01
                 inputFormated = inputFormated.Replace("+", " + ");
                 inputFormated = inputFormated.Replace("*", " * ");
                 inputFormated = inputFormated.Replace("*  - ", "* -");
+                Console.ForegroundColor = ConsoleColor.Red;
                 if (input.StartsWith("-"))
                 {
                     input = input.TrimStart('-');
